@@ -1,7 +1,7 @@
 {
   "name": "reuse",
-  "version": "0.0.1",
-  "description": "Compose different React components together",
+  "version": "1.0.0",
+  "description": "Reuse different React components to create new ones",
   "license": "MIT",
   "repository": "diegohaz/reuse",
   "main": "dist/cjs/index.js",
@@ -29,8 +29,8 @@
     "build:cjs": "cross-env BABEL_ENV=cjs npm run build:babel -- -d dist/cjs",
     "build:es": "cross-env BABEL_ENV=es npm run build:babel -- -d dist/es",
     "build": "npm run build:ts && npm run build:cjs && npm run build:es",
-    "preversion": "npm run lint && npm test && npm run build",
-    "version": "standard-changelog && git add CHANGELOG.md",
+    "prerelease": "npm run lint && npm test && npm run build",
+    "release": "standard-version",
     "postpublish": "git push origin master --follow-tags"
   },
   "husky": {
@@ -82,7 +82,6 @@
     "react-test-renderer": "^16.5.2",
     "react-testing-library": "^5.1.0",
     "rimraf": "^2.6.2",
-    "standard-changelog": "^2.0.1",
     "typescript": "^3.0.3",
     "typescript-eslint-parser": "^18.0.0"
   },
