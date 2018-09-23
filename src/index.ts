@@ -1,8 +1,3 @@
-/**
- * This function says hello.
- * @param name Some name to say hello for.
- * @returns The hello.
- */
-const sayHello = (name: string = "Haz"): string => `Hello, ${name}!`;
+import use from "./use";
 
-export default sayHello;
+export default use;

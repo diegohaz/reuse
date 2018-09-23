@@ -4,15 +4,17 @@
   "description": "Compose different React components together",
   "license": "MIT",
   "repository": "diegohaz/reuse",
-  "main": "dist/index.js",
-  "types": "dist/ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/ts/src",
   "author": {
     "name": "Haz",
     "email": "hazdiego@gmail.com",
     "url": "https://github.com/diegohaz"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "test": "jest",
@@ -22,7 +24,11 @@
     "lint": "eslint . --ext js,ts,tsx",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
-    "build": "tsc --emitDeclarationOnly && babel src -d dist -x .js,.ts,.tsx",
+    "build:ts": "tsc --emitDeclarationOnly",
+    "build:babel": "babel src -x .js,.ts,.tsx",
+    "build:cjs": "cross-env BABEL_ENV=cjs npm run build:babel -- -d dist/cjs",
+    "build:es": "cross-env BABEL_ENV=es npm run build:babel -- -d dist/es",
+    "build": "npm run build:ts && npm run build:cjs && npm run build:es",
     "preversion": "npm run lint && npm test && npm run build",
     "version": "standard-changelog && git add CHANGELOG.md",
     "postpublish": "git push origin master --follow-tags"
@@ -33,7 +39,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts,tsx}": [
       "eslint --fix --ext js,ts,tsx",
       "git add"
     ]
@@ -41,33 +47,46 @@
   "keywords": [
     "reuse"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "hoist-non-react-statics": "^3.0.1"
+  },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@types/hoist-non-react-statics": "^3.0.1",
     "@types/jest": "^23.3.2",
+    "@types/react-test-renderer": "^16.0.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.6.0",
-    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-import-resolver-typescript": "^1.0.2",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-typescript": "^0.12.0",
     "husky": "^1.0.0-rc.14",
     "jest-cli": "^23.6.0",
-    "jest-config": "^23.6.0",
     "lint-staged": "^7.2.2",
     "opn-cli": "^3.1.0",
     "prettier": "^1.14.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-test-renderer": "^16.5.2",
+    "react-testing-library": "^5.1.0",
     "rimraf": "^2.6.2",
     "standard-changelog": "^2.0.1",
     "typescript": "^3.0.3",
     "typescript-eslint-parser": "^18.0.0"
+  },
+  "peerDependencies": {
+    "react": "*"
   }
 }

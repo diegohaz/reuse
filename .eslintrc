@@ -1,8 +1,9 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "airbnb-base",
-    "plugin:prettier/recommended"
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier/react"
   ],
   "settings": {
     "import/resolver": {
@@ -14,6 +15,11 @@
     "jest": true
   },
   "rules": {
+    "no-use-before-define": "off",
+    "react/jsx-filename-extension": "off",
+    "react/destructuring-assignment": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off"
   },
   "overrides": [
     {
