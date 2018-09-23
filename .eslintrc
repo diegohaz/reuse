@@ -16,6 +16,7 @@
   },
   "rules": {
     "no-use-before-define": "off",
+    "no-restricted-syntax": "off",
     "react/jsx-filename-extension": "off",
     "react/destructuring-assignment": "off",
     "import/no-extraneous-dependencies": "off",

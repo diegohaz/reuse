@@ -82,6 +82,7 @@
     "react-test-renderer": "^16.5.2",
     "react-testing-library": "^5.1.0",
     "rimraf": "^2.6.2",
+    "standard-version": "^4.4.0",
     "typescript": "^3.0.3",
     "typescript-eslint-parser": "^18.0.0"
   },

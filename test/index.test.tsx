@@ -357,7 +357,29 @@ test("intersecting components", () => {
 });
 
 test("empty use", () => {
-  const Use = use();
-  const node = <Use />;
+  const Empty = use();
+  const node = <Empty />;
   expect(getTreeJson(node)).toMatchInlineSnapshot(`null`);
+});
+
+test("string use", () => {
+  const Div = use("div");
+  const node = <Div />;
+  expect(getTreeJson(node)).toMatchInlineSnapshot(`<div />`);
+});
+
+test("string use with children", () => {
+  const Div = use("div");
+  const node = <Div>div</Div>;
+  expect(getTreeJson(node)).toMatchInlineSnapshot(`
+<div
+  children="div"
+/>
+`);
+});
+
+test("empty use with use prop", () => {
+  const Empty = use();
+  const node = <Empty use="div" />;
+  expect(getTreeJson(node)).toMatchInlineSnapshot(`<div />`);
 });
