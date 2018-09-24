@@ -12,13 +12,15 @@
     }
   },
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "rules": {
     "no-use-before-define": "off",
     "no-restricted-syntax": "off",
     "react/jsx-filename-extension": "off",
     "react/destructuring-assignment": "off",
+    "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off"
   },

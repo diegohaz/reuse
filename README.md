@@ -7,7 +7,8 @@
 <br>
 
 <p align="center">
-  Reuse different React components to create new ones
+  Reuse different React components to create new ones<br>
+  <a href="https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/simple"><strong>Play on CodeSandbox</strong></a>
 </p>
 
 <br>
@@ -128,6 +129,12 @@ const RoundedPaperButton = use(Rounded, Paper, Button);
 <Rounded use={[Paper, Button]} /> // <button style="..." class="..." />
 <Rounded use={[Paper, Button, "div"]} /> // <div style="..." class="..." />
 ```
+
+## Examples
+
+- [Simple](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/simple)
+- [PaperRoundedButton](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/paper-rounded-button)
+- [Styled Components](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/styled-components)
 
 ## License
 
