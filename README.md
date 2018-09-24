@@ -1,13 +1,19 @@
 <br><br>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/diegohaz/reuse/master/logo/logo.png" alt="reuse" height="200" />
+  <img src="https://raw.githubusercontent.com/diegohaz/reuse/master/branding/logo.png" alt="reuse" height="200" />
 </p>
 
 <br>
 
 <p align="center">
   Reuse different React components to create new ones
+</p>
+
+<br>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/diegohaz/reuse/master/branding/graphic.png" height="350" />
 </p>
 
 <br>
@@ -50,13 +56,6 @@ const Box = use();
 <Box use={Link} />; // <Link />
 ```
 
-That will expose a static method that can be used for the same purpose:
-
-```jsx
-const BoxDiv = Box.use("div");
-<BoxDiv />; // <div />
-```
-
 You can create the component with a default element:
 
 ```jsx
@@ -79,6 +78,9 @@ const Box = use(Base);
 
 <Box />; // <div />
 <Box use="span" />; // <span />
+
+const BoxSpan = use(Box, "span");
+<BoxSpan />; // <span />
 ```
 
 You can use `Base` to filter custom props when `use` is a string using [@emotion/is-prop-valid](https://github.com/emotion-js/emotion/tree/master/next-packages/is-prop-valid), for example.
@@ -125,11 +127,6 @@ const RoundedPaperButton = use(Rounded, Paper, Button);
 // with prop
 <Rounded use={[Paper, Button]} /> // <button style="..." class="..." />
 <Rounded use={[Paper, Button, "div"]} /> // <div style="..." class="..." />
-
-// with static method
-const RoundedPaperButton = Rounded.use(Paper, Button);
-<RoundedPaperButton />; // <button style="..." class="..." />
-<RoundedPaperButton use="div" />; // <div style="..." class="..." />
 ```
 
 ## License

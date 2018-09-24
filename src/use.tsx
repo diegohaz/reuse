@@ -38,9 +38,6 @@ function use<T extends UseProp[]>(...uses: T) {
     Component = hoist(Component, item as Exclude<typeof item, string>);
   });
 
-  // @ts-ignore: It works fine, but TS is complaining about UseStaticProps
-  Component.use = (...otherUses) => use(Component, ...otherUses);
-
   return Component;
 }
 

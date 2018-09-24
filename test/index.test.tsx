@@ -45,19 +45,6 @@ test("different underlying element", () => {
 `);
 });
 
-test("simple component with static use method", () => {
-  const UseBox = use(Box);
-  const UseBoxSpan = UseBox.use("span");
-  const node = <UseBoxSpan />;
-  expect(getTreeJson(node)).toMatchInlineSnapshot(`
-<Box
-  use="span"
->
-  <span />
-</Box>
-`);
-});
-
 test("two different components", () => {
   const Other: React.SFC<UseProps> = ({ use: T = "span", ...props }) => (
     <T {...props} />

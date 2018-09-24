@@ -86,6 +86,4 @@ export type UseStaticProps<T> = {
  */
 export type UseComponent<T> = UseStaticProps<T> & {
   <TT>(props: InheritedProps<T> & UseProps<TT>): JSX.Element;
-
-  use: <TT extends UseProp[]>(...otherUses: TT) => UseComponent<T | TT[number]>;
 };
