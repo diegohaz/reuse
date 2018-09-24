@@ -35,11 +35,11 @@ npm i reuse
 
 ## Why
 
-This enables **(sub)atomic design** approach.
+This enables **(sub)[atomic design](http://bradfrost.com/blog/post/atomic-web-design/)** approach.
 
 When using classic CSS, we have a powerful way to compose "stylesheet components" by applying multiple class names to our HTML elements (`.btn`, `.large`, `.rounded` etc.). But, by doing that in React, which has its own component structure, we'll have conflicting component structures.
 
-**Reuse** solves it by combining React components together as if they were CSS classes. This also means that not only style will be merged, but also JavaScript behavior, like React lifecycle methods and event handlers.
+**Reuse** solves it by combining React components together as if they were CSS classes. This also means that not only style will be composed, but also JavaScript behavior, like React lifecycle methods and event handlers.
 
 ## Usage
 
