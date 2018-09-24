@@ -132,6 +132,8 @@ const RoundedPaperButton = use(Rounded, Paper, Button);
 <Rounded use={[Paper, Button, "div"]} /> // <div style="..." class="..." />
 ```
 
+Note that the underlying HTML element will be based on the last component you pass to `use`, either it's a React component or a string.
+
 ## Examples
 
 - [Simple](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/simple)
