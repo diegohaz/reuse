@@ -25,11 +25,13 @@ export function toArray<T>(arg?: T | T[]) {
 export function parseUse(tag?: UseProp | UseProp[] | null) {
   // istanbul ignore else
   if (Array.isArray(tag)) {
-    // remove string elements in the middle
-    const tags = tag.filter(
-      (curr, i) => typeof curr !== "string" || i === tag.length - 1
-    );
-    return tags;
+    // put the last string at the end of the array
+    const strings = tag.filter(x => typeof x === "string");
+    const components = tag.filter(x => typeof x !== "string");
+    if (strings.length) {
+      return [...components, strings[strings.length - 1]];
+    }
+    return components;
   }
   // istanbul ignore next
   return toArray(tag);

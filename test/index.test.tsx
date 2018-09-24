@@ -370,3 +370,12 @@ test("empty use with use prop", () => {
   const node = <Empty use="div" />;
   expect(getTreeJson(node)).toMatchInlineSnapshot(`<div />`);
 });
+
+test("empty components render use from previous components", () => {
+  const Empty1 = use();
+  const Empty2 = use();
+  const Button = use("button");
+  const Component = use(use(Button), Empty1, Empty2);
+  const node = <Component />;
+  expect(getTreeJson(node)).toMatchInlineSnapshot(`<button />`);
+});
