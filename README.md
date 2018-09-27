@@ -21,6 +21,7 @@
 
 <p align="center">
   <a href="https://npmjs.org/package/reuse"><img alt="NPM version" src="https://img.shields.io/npm/v/reuse.svg?style=flat-square" /></a>
+  <a href="https://david-dm.org/diegohaz/reuse"><img alt="Dependencies" src="https://img.shields.io/david/diegohaz/reuse/master.svg?style=flat-square" /></a>
   <a href="https://travis-ci.org/diegohaz/reuse"><img alt="Build Status" src="https://img.shields.io/travis/diegohaz/reuse/master.svg?style=flat-square" /></a>
   <a href="https://codecov.io/gh/diegohaz/reuse/branch/master"><img alt="Coverage Status" src="https://img.shields.io/codecov/c/github/diegohaz/reuse/master.svg?style=flat-square" /></a>
 </p>

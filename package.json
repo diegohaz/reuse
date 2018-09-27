@@ -47,9 +47,7 @@
   "keywords": [
     "reuse"
   ],
-  "dependencies": {
-    "hoist-non-react-statics": "^3.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",

@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import * as React from "react";
-import hoist from "hoist-non-react-statics";
 import { UseProps, UseProp, UseComponent } from "./types";
 import { omit, toArray } from "./utils";
 
@@ -64,7 +63,7 @@ function render(props: UseProps<any>) {
 }
 
 function use<T extends UseProp[]>(...uses: T) {
-  let Component = React.forwardRef((props, ref) =>
+  return React.forwardRef((props, ref) =>
     render(
       Object.assign(omit(props, "useNext"), {
         ref,
@@ -72,12 +71,6 @@ function use<T extends UseProp[]>(...uses: T) {
       })
     )
   ) as UseComponent<T[number]>;
-
-  uses.filter(item => item && typeof item !== "string").forEach(item => {
-    Component = hoist(Component, item as Exclude<typeof item, string>);
-  });
-
-  return Component;
 }
 
 export default use;

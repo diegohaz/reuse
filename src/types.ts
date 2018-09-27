@@ -49,10 +49,10 @@ export type UseProp<P = any> =
 export type ComponentOnly<T> = UnionToIntersection<Exclude<T, string>>;
 
 /**
- * Remove `use` key from object `T` if it's present
+ * Remove use props from object `T` if they're present
  * @template T Object
  */
-export type WithoutUseProps<T> = Without<T, "use" | "uses">;
+export type WithoutUseProps<T> = Without<T, "use" | "useNext" | "useFallback">;
 
 /**
  * Grab components passed to the `use` prop and return their props
@@ -74,17 +74,9 @@ export type UseProps<T> = {
 } & InheritedProps<T>;
 
 /**
- * Return static members of a type, except "use"
- * @template T Component type
- */
-export type UseStaticProps<T> = {
-  [K in Exclude<keyof ComponentOnly<T>, "use">]: ComponentOnly<T>[K]
-};
-
-/**
  * Component created with `use()`
  * @template T Component type passed to `use(...components)`
  */
-export type UseComponent<T> = UseStaticProps<T> & {
+export type UseComponent<T> = {
   <TT>(props: InheritedProps<T> & UseProps<TT>): JSX.Element;
 };
