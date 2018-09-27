@@ -45,11 +45,17 @@ When using classic CSS, we have a powerful way to compose "stylesheet components
 
 Reuse simply exports a factory method that returns a React component. You can leverage that method in two ways: [augmentation](#augmentation) and [combination](#combination).
 
+### Examples
+
+- [Simple](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/simple)
+- [PaperRoundedButton](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/paper-rounded-button)
+- [Styled Components](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/styled-components)
+
 ### Augmentation
 
 The component returned by the `use` factory will expect a `use` prop:
 
-```js
+```jsx
 import use from "reuse";
 
 const Box = use();
@@ -86,16 +92,30 @@ const BoxSpan = use(Box, "span");
 <BoxSpan />; // <span />
 ```
 
-You can use `Base` to filter custom props when `use` is a string using [@emotion/is-prop-valid](https://github.com/emotion-js/emotion/tree/master/next-packages/is-prop-valid), for example.
+> You can use `Base` to filter custom props when `use` is a string using [@emotion/is-prop-valid](https://github.com/emotion-js/emotion/tree/master/next-packages/is-prop-valid), for example.
 
 ### Combination
 
-You can create other components similar to `Box` or even use `Box` as a base component:
+Let's create some components:
 
 ```jsx
-// usual component example
-const Button = props => (
-  <Box
+
+// Using styled-components
+const Paper = styled(use("div"))`
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.30);
+`;
+
+// Using class names
+const Rounded = use(({ use: T, ...props }) => (
+  <T
+    {...props}
+    className={`rounded ${props.className}`}
+  />
+), "div");
+
+// Using inline styles
+const Button = use(({ use: T, ...props }) => (
+  <T
     {...props}
     style={{
       padding: "0 1em",
@@ -105,15 +125,7 @@ const Button = props => (
       ...props.style
     }}
   />
-);
-
-// styled component example
-const Button = styled(Box)`
-  padding: 0 1em;
-  line-height: 2.5em;
-  background: #3f51b5;
-  color: white;
-`;
+), "button");
 ```
 
 Once you have a few of those components, you can combine them using the same `use` methods:
@@ -132,13 +144,55 @@ const RoundedPaperButton = use(Rounded, Paper, Button);
 <Rounded use={[Paper, Button, "div"]} /> // <div style="..." class="..." />
 ```
 
-Note that the underlying HTML element will be based on the last component you pass to `use`, either it's a React component or a string.
+Note that the underlying HTML element will be based on the last string component you pass to `use`:
 
-## Examples
+```js
+const Div = use("div");
+const Button = use("button");
+const Empty = use();
+use(Div, Button, Empty); // <button />
+```
 
-- [Simple](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/simple)
-- [PaperRoundedButton](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/paper-rounded-button)
-- [Styled Components](https://codesandbox.io/s/github/diegohaz/reuse/tree/master/examples/styled-components)
+## FAQ
+
+<details>
+<summary><strong>How does this compare to render props and HOCs?</strong></summary>
+
+These are equivalent implementations:
+
+**Render props**
+```jsx
+<Paper>
+  {paperProps => (
+    <Rounded {...paperProps}>
+      {roundedProps => (
+        <Button {...roundedProps}>
+          {buttonProps => (
+            <button {...buttonProps}>Button</button>
+          )}
+        </Button>
+      )}
+    </Rounded>
+  )}
+</Paper>
+```
+
+**High-order components**
+```jsx
+withPaper(withRounded(withButton(props => <button {...props}>Button</button>)));
+```
+
+**Reuse**
+```jsx
+use(Paper, Rounded, Button);
+// or
+<Paper use={[Rounded, Button]} />
+```
+
+When using render props or HOCs, you have to stick with their static (HOC) or dynamic implementation (render prop). With Reuse, besides simplicity, you can use both depending on your needs.
+
+</details>
+
 
 ## License
 

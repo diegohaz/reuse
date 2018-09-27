@@ -4,6 +4,6 @@ import use from "reuse";
 
 const Box = use("div");
 
-const App = () => <Box>Box</Box>;
+const App = () => <Box use="span">Box</Box>;
 
 ReactDOM.render(<App />, document.getElementById("root"));
