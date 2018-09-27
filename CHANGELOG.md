@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/diegohaz/reuse/compare/v1.0.2...v1.0.3) (2018-09-27)
+
+
+### Bug Fixes
+
+* Make it work with styled-components v4 ([#5](https://github.com/diegohaz/reuse/issues/5)) ([8ba7751](https://github.com/diegohaz/reuse/commit/8ba7751))
+* Render the last non-empty element ([#3](https://github.com/diegohaz/reuse/issues/3)) ([c7a8c58](https://github.com/diegohaz/reuse/commit/c7a8c58))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/diegohaz/reuse/compare/v1.0.1...v1.0.2) (2018-09-24)
 
