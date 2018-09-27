@@ -67,9 +67,10 @@ export type InheritedProps<T> = WithoutUseProps<
  * @template T The type of the `use` prop
  */
 export type UseProps<T> = {
-  use?: T | T[];
-  uses?: T | T[];
-  ref?: React.RefObject<any>;
+  readonly use?: T | T[];
+  readonly useNext?: T | T[];
+  readonly useFallback?: keyof JSX.IntrinsicElements;
+  readonly ref?: React.RefObject<any>;
 } & InheritedProps<T>;
 
 /**
