@@ -1,6 +1,6 @@
 {
   "name": "reuse",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Reuse different React components to create new ones",
   "license": "MIT",
   "repository": "diegohaz/reuse",
