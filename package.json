@@ -45,7 +45,8 @@
     ]
   },
   "keywords": [
-    "reuse"
+    "reuse",
+    "react"
   ],
   "dependencies": {},
   "devDependencies": {

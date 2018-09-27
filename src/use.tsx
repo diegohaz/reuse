@@ -8,58 +8,26 @@ const Use = React.forwardRef((props: UseProps<any>, ref) =>
 );
 
 function render(props: UseProps<any>) {
-  let { useFallback } = props;
-  const T = toArray(props.use).filter(x => x !== Use);
-
-  // useFallback is used to make this
-  // use(use("div"), use("span"), use())
-  // render "span" instead of null
-  // ["div", "span", Empty] -> [Empty] / useFallback = "span"
-  while (typeof T[0] === "string") {
-    useFallback = T.shift();
-  }
-
-  const [Component = useFallback, ...useNext] = T;
+  // filter Use and string components in the middle
+  const [Component, ...useNext] = toArray(props.use).filter(
+    (x, i, arr) => x !== Use && (typeof x !== "string" || i === arr.length - 1)
+  );
 
   if (!Component) {
     return null;
   }
 
-  const finalProps = omit(props, "use", "useNext", "useFallback");
+  const finalProps = omit(props, "use", "useNext");
 
-  if (typeof Component === "string") {
+  if (!useNext.length || typeof Component === "string") {
     return <Component {...finalProps} />;
   }
 
-  if (!useNext.length) {
-    return (
-      <Component
-        {...finalProps}
-        use={useFallback ? Use : undefined}
-        useFallback={useFallback}
-      />
-    );
-  }
-
   if (useNext.length === 1) {
-    return (
-      <Component
-        {...finalProps}
-        use={Use}
-        useNext={useNext[0]}
-        useFallback={typeof useNext[0] !== "string" ? useFallback : undefined}
-      />
-    );
+    return <Component {...finalProps} use={useNext[0]} />;
   }
 
-  return (
-    <Component
-      {...props}
-      use={Use}
-      useNext={useNext}
-      useFallback={useFallback}
-    />
-  );
+  return <Component {...props} use={Use} useNext={useNext} />;
 }
 
 function use<T extends UseProp[]>(...uses: T) {

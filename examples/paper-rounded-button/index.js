@@ -24,21 +24,19 @@ const Rounded = props => (
   />
 );
 
-const Button = use(
-  props => (
-    <Box
-      {...props}
-      style={{
-        fontSize: 16,
-        padding: "0 1em",
-        lineHeight: "2.5em",
-        background: "#3f51b5",
-        color: "white",
-        ...props.style
-      }}
-    />
-  ),
-  "button"
+const Button = props => (
+  <Box
+    use="button"
+    {...props}
+    style={{
+      fontSize: 16,
+      padding: "0 1em",
+      lineHeight: "2.5em",
+      background: "#3f51b5",
+      color: "white",
+      ...props.style
+    }}
+  />
 );
 
 const PaperRoundedButton = use(Paper, Rounded, Button);

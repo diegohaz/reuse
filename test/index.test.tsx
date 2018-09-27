@@ -34,8 +34,7 @@ test("different underlying element", () => {
   const BoxSpan = use(Box, "span");
   expect(getTreeJson(<BoxSpan />)).toMatchInlineSnapshot(`
 <Box
-  use={ForwardRef}
-  useNext="span"
+  use="span"
 >
   <span />
 </Box>
@@ -54,8 +53,7 @@ test("two different components", () => {
   const Box1Box2 = use(Box1, Box2);
   expect(getTreeJson(<Box1Box2 />)).toMatchInlineSnapshot(`
 <Box1
-  use={ForwardRef}
-  useNext={Box2}
+  use={Box2}
 >
   <Box2>
     <span />
@@ -71,12 +69,10 @@ test("two different components rendering the same", () => {
   const Box1Box2 = use(Box1, Box2);
   expect(getTreeJson(<Box1Box2 />)).toMatchInlineSnapshot(`
 <Box1
-  use={ForwardRef}
-  useNext={Box2}
+  use={Box2}
 >
   <Box
-    use={ForwardRef}
-    useNext={Box2}
+    use={Box2}
   >
     <Box2>
       <Box>
@@ -103,8 +99,7 @@ test("two components and a different underlying element", () => {
   }
 >
   <Box2
-    use={ForwardRef}
-    useNext="a"
+    use="a"
   >
     <a />
   </Box2>
@@ -140,8 +135,7 @@ test("two different components with custom props", () => {
 <Box1
   bar=""
   foo=""
-  use={ForwardRef}
-  useNext={Box2}
+  use={Box2}
 >
   <Box2
     bar=""
@@ -161,8 +155,7 @@ test("use component with use prop", () => {
   const UseBox = use(Box);
   expect(getTreeJson(<UseBox use="span" />)).toMatchInlineSnapshot(`
 <Box
-  use={ForwardRef}
-  useNext="span"
+  use="span"
 >
   <span />
 </Box>
@@ -174,8 +167,7 @@ test("use component with same use prop", () => {
   const UseBox = use(Box);
   expect(getTreeJson(<UseBox use="div" />)).toMatchInlineSnapshot(`
 <Box
-  use={ForwardRef}
-  useNext="div"
+  use="div"
 >
   <div />
 </Box>
@@ -206,8 +198,7 @@ test("two different components with custom props and use prop", () => {
   <Box2
     bar=""
     foo=""
-    use={ForwardRef}
-    useNext="a"
+    use="a"
   >
     <a
       bar=""
@@ -224,8 +215,7 @@ test("use component with use prop as other component", () => {
   const UseBox1 = use(Box1);
   expect(getTreeJson(<UseBox1 use={Box2} />)).toMatchInlineSnapshot(`
 <Box1
-  use={ForwardRef}
-  useNext={Box2}
+  use={Box2}
 >
   <Box2>
     <span />
@@ -242,7 +232,6 @@ test("use component with use prop as other use component", () => {
   expect(getTreeJson(<UseBox1 use={UseBox2} />)).toMatchInlineSnapshot(`
 <Box1
   use={ForwardRef}
-  useNext={ForwardRef}
 >
   <Box2>
     <span />
@@ -267,8 +256,7 @@ test("use component with use prop as multiple component", () => {
   }
 >
   <Box2
-    use={ForwardRef}
-    useNext={Box3}
+    use={Box3}
   >
     <Box3>
       <a />
@@ -303,8 +291,7 @@ test("use component with custom prop with use prop as multiple component", () =>
   <Box2
     bar=""
     foo=""
-    use={ForwardRef}
-    useNext={Box3}
+    use={Box3}
   >
     <Box3
       bar=""
@@ -327,8 +314,7 @@ test("nested use", () => {
   const UseBox1Box2 = use(UseBox1, Box2);
   expect(getTreeJson(<UseBox1Box2 />)).toMatchInlineSnapshot(`
 <Box1
-  use={ForwardRef}
-  useNext={Box2}
+  use={Box2}
 >
   <Box2>
     <span />
@@ -347,8 +333,7 @@ test("nested use with custom prop", () => {
   expect(getTreeJson(<UseBox1Box2 foo="" />)).toMatchInlineSnapshot(`
 <Box1
   foo=""
-  use={ForwardRef}
-  useNext={Box2}
+  use={Box2}
 >
   <Box2
     foo=""
@@ -376,8 +361,7 @@ test("really nested use with use prop", () => {
   const UseBox = use(use(use(use(use(Box)))));
   expect(getTreeJson(<UseBox use="span" />)).toMatchInlineSnapshot(`
 <Box
-  use={ForwardRef}
-  useNext="span"
+  use="span"
 >
   <span />
 </Box>
@@ -408,33 +392,21 @@ test("empty use with use prop", () => {
   expect(getTreeJson(<Empty use="div" />)).toMatchInlineSnapshot(`<div />`);
 });
 
-test("empty uses after string use", () => {
-  const Empty1 = use();
-  const Empty2 = use();
+test("empty use after string use", () => {
+  const Empty = use();
   const Button = use("button");
-  const ButtonEmpty1Empty2 = use(use(Button), Empty1, Empty2);
-  expect(getTreeJson(<ButtonEmpty1Empty2 />)).toMatchInlineSnapshot(
-    `<button />`
-  );
+  const ButtonEmpty1Empty2 = use(use(Button), Empty);
+  expect(getTreeJson(<ButtonEmpty1Empty2 />)).toMatchInlineSnapshot(`null`);
 });
 
-test("empty uses after component use", () => {
+test("empty use after component use", () => {
   const Box = ({ use: T = "div", ...props }: UseProps) => <T {...props} />;
   const Button = use(Box, "button");
-  const ButtonEmptyEmpty = use(Button, use(), use());
+  const ButtonEmptyEmpty = use(Button, use());
   expect(getTreeJson(<ButtonEmptyEmpty />)).toMatchInlineSnapshot(`
 <Box
   use={ForwardRef}
-  useNext={
-    Array [
-      "button",
-      ForwardRef,
-      ForwardRef,
-    ]
-  }
->
-  <button />
-</Box>
+/>
 `);
 });
 
@@ -443,14 +415,7 @@ test("empty custom component after two use components", () => {
   const Div = use("div");
   const Button = use("button");
   const DivButtonBox = use(Div, Button, Box);
-  expect(getTreeJson(<DivButtonBox />)).toMatchInlineSnapshot(`
-<Box
-  use={ForwardRef}
-  useFallback="button"
->
-  <button />
-</Box>
-`);
+  expect(getTreeJson(<DivButtonBox />)).toMatchInlineSnapshot(`<Box />`);
 });
 
 test("custom component with default use prop after two use components", () => {
@@ -459,11 +424,8 @@ test("custom component with default use prop after two use components", () => {
   const Button = use("button");
   const DivButtonBox = use(Div, Button, Box);
   expect(getTreeJson(<DivButtonBox />)).toMatchInlineSnapshot(`
-<Box
-  use={ForwardRef}
-  useFallback="button"
->
-  <button />
+<Box>
+  <a />
 </Box>
 `);
 });
@@ -473,14 +435,7 @@ test("use prop with empty component after two use components", () => {
   const Div = use("div");
   const Button = use("button");
   const DivButton = use(Div, Button);
-  expect(getTreeJson(<DivButton use={Box} />)).toMatchInlineSnapshot(`
-<Box
-  use={ForwardRef}
-  useFallback="button"
->
-  <button />
-</Box>
-`);
+  expect(getTreeJson(<DivButton use={Box} />)).toMatchInlineSnapshot(`<Box />`);
 });
 
 test("use prop with string after two use components", () => {
@@ -498,11 +453,8 @@ test("use prop with custom component with default use prop after two use compone
   const Button = use("button");
   const DivButton = use(Div, Button);
   expect(getTreeJson(<DivButton use={Box} />)).toMatchInlineSnapshot(`
-<Box
-  use={ForwardRef}
-  useFallback="button"
->
-  <button />
+<Box>
+  <a />
 </Box>
 `);
 });
@@ -515,16 +467,9 @@ test("render the last use", () => {
   expect(getTreeJson(<DivButton />)).toMatchInlineSnapshot(`
 <Box
   use={ForwardRef}
-  useNext={
-    Array [
-      "div",
-      ForwardRef,
-    ]
-  }
 >
   <Box
-    use={ForwardRef}
-    useNext="button"
+    use="button"
   >
     <button />
   </Box>

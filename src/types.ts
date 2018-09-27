@@ -69,7 +69,6 @@ export type InheritedProps<T> = WithoutUseProps<
 export type UseProps<T> = {
   readonly use?: T | T[];
   readonly useNext?: T | T[];
-  readonly useFallback?: keyof JSX.IntrinsicElements;
   readonly ref?: React.RefObject<any>;
 } & InheritedProps<T>;
 
