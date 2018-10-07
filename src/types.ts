@@ -43,12 +43,6 @@ export type UseProp<P = any> =
   | React.ComponentType<P>;
 
 /**
- * Exclude element types from UseType
- * @template T Component type
- */
-export type ComponentOnly<T> = UnionToIntersection<Exclude<T, string>>;
-
-/**
  * Remove use props from object `T` if they're present
  * @template T Object
  */
