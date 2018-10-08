@@ -46,7 +46,7 @@ export type UseProp<P = any> =
  * Remove use props from object `T` if they're present
  * @template T Object
  */
-export type WithoutUseProps<T> = Without<T, "use" | "useNext" | "useFallback">;
+export type WithoutUseProps<T> = Without<T, "use" | "useNext">;
 
 /**
  * Grab components passed to the `use` prop and return their props
