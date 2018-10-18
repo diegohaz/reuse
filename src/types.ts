@@ -72,4 +72,5 @@ export type UseProps<T> = React.Props<any> &
  */
 export type UseComponent<T> = {
   <TT>(props: InheritedProps<T> & UseProps<TT>): JSX.Element;
+  uses: T[];
 };

@@ -17,11 +17,10 @@ const Button = styled(use("button"))`
   line-height: 2.5em;
   background: #3f51b5;
   color: white;
-`;
-
-const PaperRoundedButton = styled(use(Paper, Rounded, Button))`
   cursor: pointer;
 `;
+
+const PaperRoundedButton = use(Paper, Rounded, Button);
 
 const App = () => <PaperRoundedButton>Button</PaperRoundedButton>;
 

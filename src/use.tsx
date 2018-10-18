@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import * as React from "react";
 import { UseProps, UseProp, UseComponent } from "./types";
-import { omit, toArray } from "./utils";
+import { omit, toArray, arrayContainsArray } from "./utils";
 
 const Use = React.forwardRef((props: UseProps<any>, ref) =>
   render(Object.assign(omit(props, "useNext"), { ref, use: props.useNext }))
@@ -30,8 +30,20 @@ function render(props: UseProps<any>) {
   return <Component {...props} use={Use} useNext={useNext} />;
 }
 
+function isUseComponent<T extends UseProp[]>(
+  component?: any
+): component is UseComponent<T[number]> {
+  return component && Array.isArray(component.uses);
+}
+
 function use<T extends UseProp[]>(...uses: T) {
-  return React.forwardRef((props, ref) =>
+  const [First, ...next] = uses;
+
+  if (isUseComponent(First) && arrayContainsArray(First.uses, next)) {
+    return First;
+  }
+
+  const Component = React.forwardRef((props, ref) =>
     render(
       Object.assign(omit(props, "useNext"), {
         ref,
@@ -39,6 +51,10 @@ function use<T extends UseProp[]>(...uses: T) {
       })
     )
   ) as UseComponent<T[number]>;
+
+  Component.uses = uses;
+
+  return Component;
 }
 
 export default use;

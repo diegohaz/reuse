@@ -21,3 +21,11 @@ export function toArray<T>(arg?: T | T[]) {
   if (typeof arg === "undefined") return [];
   return Array.isArray(arg) ? arg : [arg];
 }
+
+export function arrayContainsArray(superset: any[], subset: any[]) {
+  if (superset.length < subset.length) return false;
+  for (const value of subset) {
+    if (superset.indexOf(value) === -1) return false;
+  }
+  return true;
+}
