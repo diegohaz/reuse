@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "dist/ts",
     "target": "esnext",
     "module": "esnext",
