@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/diegohaz/reuse/compare/v1.0.5...v1.1.0) (2018-10-18)
+
+
+### Features
+
+* **typescript:** Export types ([a997d3d](https://github.com/diegohaz/reuse/commit/a997d3d))
+
+
+
 <a name="1.0.5"></a>
 ## [1.0.5](https://github.com/diegohaz/reuse/compare/v1.0.4...v1.0.5) (2018-10-18)
 
