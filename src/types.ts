@@ -73,6 +73,7 @@ export type UseProps<T> = React.Props<any> &
 export type UseComponent<T> = {
   <TT>(props: InheritedProps<T> & UseProps<TT>): JSX.Element;
   uses: T[];
-  defaultProps?: Partial<InheritedProps<T> & UseProps<UseProp>>;
+  propTypes?: any;
+  defaultProps?: any;
   displayName?: string;
 };
