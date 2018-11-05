@@ -73,4 +73,8 @@ export type UseProps<T> = React.Props<any> &
 export type UseComponent<T> = {
   <TT>(props: InheritedProps<T> & UseProps<TT>): JSX.Element;
   uses: T[];
+  propTypes?: React.ValidationMap<InheritedProps<T>>;
+  contextTypes?: React.ValidationMap<any>;
+  defaultProps?: Partial<InheritedProps<T>>;
+  displayName?: string;
 };

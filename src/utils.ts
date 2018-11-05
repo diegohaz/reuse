@@ -1,6 +1,6 @@
 import { Omit, Dictionary } from "./types";
 
-export function omit<P extends Dictionary, K extends keyof P>(
+export function omit<P extends Dictionary, K extends string>(
   object: P,
   ...paths: K[]
 ) {
