@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/diegohaz/reuse/compare/v1.2.3...v1.3.0) (2018-12-02)
+
+
+### Features
+
+* Support new `React.ExoticComponent` type ([#8](https://github.com/diegohaz/reuse/issues/8)) ([37e4718](https://github.com/diegohaz/reuse/commit/37e4718))
+
+
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/diegohaz/reuse/compare/v1.2.2...v1.2.3) (2018-11-05)
 
