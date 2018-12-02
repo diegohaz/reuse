@@ -31,6 +31,7 @@ export type UnionToIntersection<U> = (U extends any
 export type ComponentToProps<T> = T extends
   | React.ComponentType<infer P>
   | React.Component<infer P>
+  | React.ExoticComponent<infer P>
   ? P
   : never;
 
@@ -49,6 +50,12 @@ export type UseProp<P = any> =
 export type WithoutUseProps<T> = Without<T, "use" | "useNext">;
 
 /**
+ * Remove ref prop from object `T` if it's present
+ * @template T Object
+ */
+export type WithoutRef<T> = Without<T, "ref">;
+
+/**
  * Grab components passed to the `use` prop and return their props
  * @template T Component type
  */
@@ -60,7 +67,7 @@ export type InheritedProps<T> = WithoutUseProps<
  * Props of a component created with `use()`
  * @template T The type of the `use` prop
  */
-export type UseProps<T> = React.Props<any> &
+export type UseProps<T> = React.ClassAttributes<any> &
   InheritedProps<T> & {
     readonly use?: T | T[];
     readonly useNext?: T | T[];
@@ -71,7 +78,9 @@ export type UseProps<T> = React.Props<any> &
  * @template T Component type passed to `use(...components)`
  */
 export type UseComponent<T> = {
-  <TT>(props: InheritedProps<T> & UseProps<TT>): JSX.Element;
+  <TT>(props: WithoutRef<InheritedProps<T>> & UseProps<TT>): React.ReactElement<
+    any
+  > | null;
   uses: T[];
   propTypes?: any;
   defaultProps?: any;

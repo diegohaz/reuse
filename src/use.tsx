@@ -43,14 +43,15 @@ function use<T extends UseProp[]>(...uses: T) {
     return First;
   }
 
-  const Component = React.forwardRef((props, ref) =>
-    render(
-      Object.assign(omit(props, "useNext"), {
-        ref,
-        use: [...uses, ...toArray(props.use), ...toArray(props.useNext)]
-      })
-    )
-  ) as UseComponent<T[number]>;
+  const Component = (React.forwardRef<React.ComponentType<any>, UseProps<any>>(
+    (props, ref) =>
+      render(
+        Object.assign(omit(props, "useNext"), {
+          ref,
+          use: [...uses, ...toArray(props.use), ...toArray(props.useNext)]
+        })
+      )
+  ) as unknown) as UseComponent<T[number]>;
 
   Component.uses = uses;
 
