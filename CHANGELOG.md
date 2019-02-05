@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/diegohaz/reuse/compare/v1.3.0...v2.0.0) (2019-02-05)
+
+
+### Bug Fixes
+
+* Fix inconsistencies with `styled-components` ([#11](https://github.com/diegohaz/reuse/issues/11)) ([7746694](https://github.com/diegohaz/reuse/commit/7746694))
+
+
+### BREAKING CHANGES
+
+* Now `use()` always return an enhanced component.
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/diegohaz/reuse/compare/v1.2.3...v1.3.0) (2018-12-02)
 
