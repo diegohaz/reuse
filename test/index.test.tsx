@@ -476,12 +476,3 @@ test("render the last use", () => {
 </Box>
 `);
 });
-
-test("do not create another component if uses are the same", () => {
-  const Div1 = use("div");
-  const Div2 = use(Div1, "div");
-  const Div3 = use(Div2, "div");
-  expect(Div1).toBe(Div2);
-  expect(Div1).toBe(Div3);
-  expect(Div2).toBe(Div3);
-});

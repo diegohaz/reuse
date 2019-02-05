@@ -1,7 +1,5 @@
 import * as React from "react";
 
-export type Dictionary<T = any> = { [key: string]: T };
-
 /**
  * @template T Object
  * @template K Union of T keys

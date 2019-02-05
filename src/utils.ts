@@ -1,11 +1,11 @@
-import { Omit, Dictionary } from "./types";
+import { Omit } from "./types";
 
-export function omit<P extends Dictionary, K extends string>(
-  object: P,
+export function omit<T extends Record<string, any>, K extends keyof T>(
+  object: T,
   ...paths: K[]
 ) {
   const keys = Object.keys(object);
-  const result = {} as Omit<P, K>;
+  const result: Record<string, any> = {};
 
   for (let i = 0; i < keys.length; i += 1) {
     const key = keys[i];
@@ -14,18 +14,10 @@ export function omit<P extends Dictionary, K extends string>(
     }
   }
 
-  return result;
+  return result as Omit<T, K>;
 }
 
 export function toArray<T>(arg?: T | T[]) {
   if (typeof arg === "undefined") return [];
   return Array.isArray(arg) ? arg : [arg];
-}
-
-export function arrayContainsArray(superset: any[], subset: any[]) {
-  if (superset.length < subset.length) return false;
-  for (const value of subset) {
-    if (superset.indexOf(value) === -1) return false;
-  }
-  return true;
 }
